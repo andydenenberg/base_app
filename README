@@ -1,0 +1,71 @@
+== Welcome to Rails
+
+The following instructions will produce a nicely styled base application that includes security, styling and formatting. 
+
+Step 1. Create a new rails app with out the testing framework.  Will be adding RSpec gem later.
+
+rails new theme-gen –T 
+
+
+Step 2.  Modify the gemfile
+
+Add the following:
+
+gem ‘devise’
+gem ‘will_paginate’
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'web-app-theme', '~> 0.8.0'
+end
+
+
+Step 3. Create the initial build.
+
+bundle install
+
+
+Step 4.  Create a home controller
+rails g controller home index
+root :to => "home#index"
+rm public/index.html
+
+Step 5.  Generate the Theme
+rails g web_app_theme:theme --app-name="Supporting those in need"
+and 
+
+This will raise an error:
+
+conflict  app/views/layouts/application.html.erb
+Overwrite /Users/andydenenberg/Documents/depaul/theme-g/app/views/layouts/application.html.erb? (enter "h" for help) [Ynaqdh]
+
+Respond with ‘a’ for all
+
+
+Step 6. Fix the error with the following change to: 
+
+app/views/layouts/application.html.haml
+
+     = stylesheet_link_tag 'web_app_theme'
+-    = javascript_include_tag :defaults, :cache => true
++    = javascript_include_tag 'application'
+     = csrf_meta_tag
+
+Step 7.  Generate a sample text home page ( this is optional )
+
+rails g web_app_theme:themed home --themed-type=text
+
+Step 8.  If you do Step 7. The do the following: copy the show page to the index page..
+
+mv app/views/home/show.html.erb app/views/home/index.html.erb
+
+Step 9. generate a copy of the current theme to your app so that you could modify them
+
+rails g web_app_theme:assets
+
+Step 10. Copy missing images in the following folder:
+app/assets/images/web-app-theme/
+
+You now have  nicely formatted base application.
+
+The original writeup for this is: http://blog.bryanbibat.net/2011/09/24/starting-a-professional-rails-3-1-app-with-web-app-theme-devise-and-kaminari/
