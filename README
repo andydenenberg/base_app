@@ -69,3 +69,62 @@ app/assets/images/web-app-theme/
 You now have  nicely formatted base application.
 
 The original writeup for this is: http://blog.bryanbibat.net/2011/09/24/starting-a-professional-rails-3-1-app-with-web-app-theme-devise-and-kaminari/
+
+
+Need to check - The stylesheet for alert messages are still defined under “error” class. Fix here.
+https://github.com/bryanbibat/pro-template-app-31/commit/2a85a7261fd37dbba1e2ead14aa8072549814f2c#L26R358
+
+Adding Devise
+
+Step 1. Install Devise
+	
+		rails g devise:install
+		
+Step 2. create the devise users
+
+		rails g devise user
+
+Step 3. Customize the login screen.  Enable scoped views in devise.  Make sure to set true and remove the comment # on line 170.
+
+		modify the following file:  config/initializers/devise.rb		
+
+			 166	+  # ==> Scopes configuration
+		 	 167	+  # Turn scoped views on. Before rendering "sessions/new", it will first check for
+		 	 168	+  # "users/sessions/new". It's turned off by default because it's slower if you
+		 	 169	+  # are using only default views.
+		 	 170	+  config.scoped_views = true
+		
+Step 4. Generate the sign-in/sign-out layout
+
+			rails g web_app_theme:theme sign --layout-type=sign --app-name="My Latest Web App"
+			
+Step 4. Modify config/application.rb to change the layout for sign/in sign/out
+
+			Add these lines to the end of the file:
+			
+			    # Version of your assets, change this if you want to expire all your assets
+			    config.assets.version = '1.0'
+
+			    config.to_prepare do
+			      Devise::SessionsController.layout "sign"
+			      Devise::RegistrationsController.layout "sign"
+			    end
+			  end
+			end
+			
+Step 5. Generate the Devise views
+
+			rails g devise:views
+
+Step 6. Run the devise db migration
+			
+			rake db:migrate
+			
+Step 6. Copy the following ready modified views:
+
+			views/devise/registrations/new.html
+			views/devise/sessions/new.html
+			
+		Note that other screens need to be updated like edit registrations
+		
+The basic system is now ready
