@@ -5,13 +5,22 @@ gem 'rails', '3.1.1'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+gem 'therubyracer-heroku', :group => :production
+group :production do
+gem 'pg'
+end
+
+group :development, :test do
 gem 'sqlite3'
+end
+
+# gem 'sqlite3'
 
 gem 'devise'
 
 gem 'will_paginate'
 
-# added from bryanbibat blog
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'web-app-theme', '~> 0.8.0'
