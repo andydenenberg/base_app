@@ -20,6 +20,7 @@ gem 'devise'
 
 gem 'will_paginate'
 
+gem 'haml'
 
 group :development, :test do
   gem 'rspec-rails'

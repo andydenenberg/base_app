@@ -128,3 +128,37 @@ Step 6. Copy the following ready modified views:
 		Note that other screens need to be updated like edit registrations
 		
 The basic system is now ready
+
+
+Changes made 11_28_2011
+
+Step 1. Install the haml gem
+
+		gem 'haml' 
+		
+Step 2.  Rename app/views/devise/registrations/new.html.erb new.html.erb_bak
+Step 3.	 Rename app/views/devise/sessions/new.html.erb new.html.erb_bak
+
+Step 3.5 Fis the /app/assets/stylesheets/web-app-theme/themes/default/style to fix the alert handler
+
+-.flash .error, .flash .error-list, .flash  {
++.flash .error, .flash .error-list, .flash .alert {
+
+Step 4.  Copy the HAML version of the two new devise views into their directories
+
+Step 5.  Bundle install
+
+Step 6.  Enable the before filter -  need to investigate further on the private function for scoping
+
+		class ApplicationController < ActionController::Base
+		  protect_from_forgery
+		    before_filter :authenticate_user!
+		    private
+		    def after_sign_out_path_for(resource_or_scope)
+		      scope = Devise::Mapping.find_scope!(resource_or_scope)
+		      send(:"new_#{scope}_session_path")
+		    end
+		end
+
+
+

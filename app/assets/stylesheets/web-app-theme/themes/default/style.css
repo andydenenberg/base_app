@@ -359,7 +359,7 @@ hr {
 /* +.flash .error, .flash .error-list, .flash .alert { */
 /* following line needs to be updated */
 	
-.flash .error, .flash .error-list {
+.flash .error, .flash .error-list, .flash .alert {
   border: 1px solid #993624;
   background: #cc4831 url("images/messages/error.png") no-repeat 10px center;
 }
