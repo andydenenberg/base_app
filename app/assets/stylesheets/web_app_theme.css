@@ -7,3 +7,13 @@
  */
 
 /* Write here your css for overriding the theme's rules */
+
+.pagination em {
+  font-weight: bold;  
+  margin-right: 5px;	
+  padding: 6px;			
+  border: 1px solid #c3c4ba;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}

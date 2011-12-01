@@ -160,5 +160,25 @@ Step 6.  Enable the before filter -  need to investigate further on the private 
 		    end
 		end
 
+Step 7.  Formatting with web-app-theme and will_paginate
+
+		1. @donors = Donor.paginate :page => params[:page], :per_page => 10 
+		2. rails g web_app_theme:themed donors --will-paginate
+		3. force the overwrite of the existing views
+
+
+Step 8.  Add these changes to web_app_theme.css in /assets/stylesheets/web-app-theme/
+
+		/* the following changes fix the style for will_paginate */
+
+		.pagination em {
+		  font-weight: bold;  
+		  margin-right: 5px;	
+		  padding: 6px;			
+		  border: 1px solid #c3c4ba;
+		  -moz-border-radius: 2px;
+		  -webkit-border-radius: 2px;
+		  border-radius: 2px;
+		}
 
 
